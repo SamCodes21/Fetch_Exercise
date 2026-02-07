@@ -17,10 +17,25 @@
     <main class="p-6 max-w-3x1 mx-auto bg-white mt-6 rounded shadow">
         <h1 class="text-2x1 font-bold mb-4">Project Writeup</h1>
         <p class="mb-2">
-            Writeup for GPT-4o 
+            Writeup for GPT-4o: <br>
+            GPT-4o was helpful for quick iteration on the project. I chose to use the Magic The Gathering API 
+            and during inital setup, my homepage only showed the names of cards and some sets they could be from.
+            Using GPT-4o I was easily able to add card images and randomization. My prompt was
+            "Using the mtg api how could I make it so it shows the images of the cards, also could I randomize the cards?"
+            GPT-4o provided code snippets that were easily added to my javascript file and implimented the new features.
+            Here's the code snippet for adding images: "img src="${card.imageUrl || "https://via.placeholder.com/150"}" alt="${card.name || "Card Image"}" class="w-full h-auto mt-2 rounded" />"<br>
+            Overall, GPT-4o was a versatile tool that allowed me to add new snippets to my code easily and was readily available. 
+            Also sometimes it would show highlights of code that I could use as I was writing it which was helpful.
+            The only downside was that sometimes the suggestions were not what I was going for or the code itself was not functional.
+
         </p>
         <p class="mb-2">
-            Writeup for Claude Haiku 4.5
+            Writeup for Claude Haiku 4.5: <br>
+            Claude Haiku 4.5 preformed similarly to GPT-4o as it provided code snippets and was able to come up with suggestions to improve my code.
+            One prompt I gave Claude was "In the case that the cards images don't come up, how could I make it so the cards cost is shown?" 
+            Here's that code snippet: "p class="text-sm font-bold text-blue-600 mt-2">Cost: ${card.manaCost || "N/A"}" <br>
+            Overall, Claude preformed very similarly to GPT-4o and was able to provide useful results for my prompts. 
+            Once thing I could put agaisnt it is that Claude didn't seem to provide text highlights as I was writing code but that maybe something I could turn on in settings.
         </p>
     </main>
     
