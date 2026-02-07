@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Magic The Gathering Card Documentation</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    
+<body class="bg-gray-100 text-gray-900 min-h-screen">
+    <nav class="flex justify-between items-center p-4 bg-white shadow">
+        <a href="index.html" class="text-x1 font-bold">
+            MTG Card Documentation
+        </a>
+        <a href="writeup.html" class="text-blue-600 hover:underline">
+            Writeup
+        </a>
+    </nav>
+
+    <main class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section class="bg-white p-4 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Cards</h2>
+            <div id="cards" class="space-y-2"></div>
+        </section>
+
+        <section class="bg-white p-4 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Sets</h2>
+            <div id="sets" class="space-y-2"></div>
+        </section>
+    </main>
     <script src="indexes.js"></script>
 </body>
 </html>
