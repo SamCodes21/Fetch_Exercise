@@ -1,23 +1,56 @@
 const cardsContainer = document.getElementById("cards");
 const setsContainer = document.getElementById("sets");
+let currentDisplayedCards = [];
 
 async function fetchCards() {
     const res = await fetch("https://api.magicthegathering.io/v1/cards?pageSize=100"); // Fetch more cards
     const data = await res.json();
 
-    // Shuffle the cards 
-    const shuffledCards = data.cards.sort(() => Math.random() - 0.5);
+    // Group cards by mana color
+    const colorGroups = {
+        White: [],
+        Blue: [],
+        Black: [],
+        Red: [],
+        Green: [],
+        Colorless: []
+    };
 
-    // Render a random subset of 5 cards
-    renderCards(shuffledCards.slice(0, 5));
+    data.cards.forEach(card => {
+        const colors = card.colors || ["Colorless"];
+        colors.forEach(color => {
+            if (colorGroups[color]) {
+                colorGroups[color].push(card);
+            }
+        });
+    });
+
+    // Select one card from each color group (if available)
+    const selectedCards = [];
+    Object.values(colorGroups).forEach(group => {
+        if (group.length > 0) {
+            const randomCard = group[Math.floor(Math.random() * group.length)];
+            selectedCards.push(randomCard);
+        }
+    });
+
+    // Fill remaining slots with random cards if less than 5 cards are selected
+    while (selectedCards.length < 5) {
+        const randomCard = data.cards[Math.floor(Math.random() * data.cards.length)];
+        if (!selectedCards.includes(randomCard)) {
+            selectedCards.push(randomCard);
+        }
+    }
+
+    // Store and render the selected cards
+    currentDisplayedCards = selectedCards;
+    renderCards(currentDisplayedCards);
 }
 
 async function fetchSets() {
-    const cardsRes = await fetch("https://api.magicthegathering.io/v1/cards?pageSize=100");
-    const cardsData = await cardsRes.json();
     const setsRes = await fetch("https://api.magicthegathering.io/v1/sets");
     const setsData = await setsRes.json();
-    renderSets(setsData.sets.slice(0, 5), cardsData.cards);
+    renderSets(setsData.sets.slice(0, 5), currentDisplayedCards);
 }
 
 function renderCards(cards) {
